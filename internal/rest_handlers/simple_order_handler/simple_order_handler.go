@@ -36,6 +36,13 @@ func Handle(logger *zap.Logger) func(http.ResponseWriter, *http.Request) {
 			logger.Error("method not allowed", zap.String("method", r.Method))
 			return
 		}
+
+		if r.Header.Get("Content-type") != "application/json" {
+			w.WriteHeader(http.StatusBadRequest)
+			resp.Error = &entity.Error{Message: fmt.Sprintf("content type must be application/json, '%s' provided", r.Header.Get("Content-type"))}
+			logger.Error("method not allowed", zap.String("method", r.Header.Get("Content-type")))
+			return
+		}
 		body := r.Body
 		defer body.Close()
 		rawData, err := io.ReadAll(body)
