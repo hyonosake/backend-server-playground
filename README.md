@@ -19,6 +19,7 @@ However, if you want to experiment and get more control over web-server, use `ma
 
 ## How to play with
 Web-server is available on host `127.0.0.1`, port `123321`
+
 Currently only server-side is supported, i.e. server has some endpoints for requests, but he's not the one who initiates connection
 
 
